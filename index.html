@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/css.css">
+    <script src="js/jq.js"></script>
+
+    <script src="js/vue.js"></script>
+   
+</head>
+<body>
+<div class="container" id="cont">
+    <div class="setLang">
+        <select name="" class="form-select" value="" @change="func1" id="selLang">
+            <option value="es">Spanish - español</option>
+            <option value="en">English</option>
+            <option value="hi">Hindi - हिन्दी</option>
+            <option value="ar">Arabic - العربية</option>
+            <option value="pt">Portuguese - português</option>
+            <option value="bn">Bengali - বাংলা</option>
+            <option value="ru">Russian - русский</option>
+            <option value="ja">Japanese - 日本語</option>
+            <option value="pa">Punjabi - ਪੰਜਾਬੀ</option>
+            <option value="de">Deutschland</option>
+            <option value="gr">Ελενικα</option>
+        </select>
+    </div>
+    <!-- <select class="form-select" id="languages" name="languages">
+        <option value="zh">Chinese - 中文</option>
+        <option value="es">Spanish - español</option>
+        <option value="en">English</option>
+        <option value="hi">Hindi - हिन्दी</option>
+        <option value="ar">Arabic - العربية</option>
+        <option value="pt">Portuguese - português</option>
+        <option value="bn">Bengali - বাংলা</option>
+        <option value="ru">Russian - русский</option>
+        <option value="ja">Japanese - 日本語</option>
+        <option value="pa">Punjabi - ਪੰਜਾਬੀ</option>
+        <option value="de">Deutschland</option>
+        <option value="gr">Ελενικα</option>
+
+    </select> -->
+    <div  id="page">
+    <!-- title -->
+    <h1 class="text-center p-3 text-light bg-primary rounded mt-3 d-none d-sm-block" >{{titleH}}</h1>
+    <h5 class="text-center p-3 text-light bg-primary rounded mt-3 d-sm-none d-lg-none">{{titleH}}</h5>
+    <div class="boxParent border-success border pt-2 p-2">
+        <div class="inp text-center">
+            <input class="w-75" type="date" name="" onchange="inpDate(this)" id="inpDate">
+        </div>
+        <div class="butCalc text-center"><button id="butCalc" onclick="butCalc(this)" disabled class="w-75 m-4 btn btn-success">{{but1}}</button></div>
+        <div class="resaltCalcAge">
+            <h5>{{tH5}}</h5>
+            <span id="yearAge">?</span> {{year}} <br>{{and}} <span id="monthAge">?</span> {{month}} <br>{{and}} <span id="dayAge">?</span> {{days}}
+        </div>
+        <div class="resaltCalcAge">
+            <h5>{{tH52}}</h5>
+            <span id="nyearAge">?</span> {{year}} <br>{{and}} <span id="nmonthAge">?</span> {{month}} <br>{{and}} <span id="ndayAge">?</span> {{days}}
+            <div class="prog">
+                <progress id="progNextB" max="0" value="0"></progress>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/js.js"></script>
+<script>
+    function setLang(){
+        $("body").css({
+        direction:"ltr",
+        textAlign:"-webkit-auto"
+    })
+    $(".prog").css({
+        transform:"rotateY(0deg)",
+        
+    })
+    $("#progNextB").css("transform","rotateY(0deg)")
+
+        $("#page").fadeIn();
+        console.log($("#selLang").val())
+       if($("#selLang").val()=="en"){
+        titleH="calculate Age";
+        but1=  "Calculate the age"
+        tH5=   "your Age is"
+        year=  "year / years"
+        and=   "and"
+        month= "month / Months"
+        days=  "day / days"
+        tH52=  "your next birthday in "
+       }
+       if($("#selLang").val()=="ar"){
+        titleH="حساب العمر"
+        but1="احسب العمر"
+        tH5="عمرك هو"
+        year=" سنوات /  سنة"
+        and="و"
+        month="أشهر  /  شهر"
+        days="يوم / أيام"
+        tH52="عيد ميلادك القادم في"
+    
+    $("body").css({
+        direction:"rtl",
+        textAlign:"-webkit-auto"
+    })
+    $(".prog").css("transform","rotateY(180deg)")
+    $("#progNextB").css("transform","rotateY(180deg)")
+       }
+       if($("#selLang").val()=="gr"){
+        titleH="Υπολογισμός ηλικίας"
+        but1=  "Υπολογίστε την ηλικία"
+        tH5=   "Η ηλικία σου είναι"
+        year=  "έτος / έτη"
+        and=   "και"
+        month= "μήνας / μήνες"
+        days=  "ημέρα / ημέρες"
+        tH52=  "τα επόμενα γενέθλιά σου στο"
+       }
+       if($("#selLang").val()=="de"){
+        titleH="Alter berechnen"
+        but1=  "Berechnen Sie das Alter"
+        tH5=   "dein Alter ist"
+        year=  "Jahr / Jahre"
+        and=   "Und"
+        month= "Monat / Monate"
+        days=  "Tag / Tage"
+        tH52=  "Dein nächster Geburtstag in"
+       }
+       if($("#selLang").val()=="es"){
+        titleH="calcular edad"
+        but1=  "Calcular la edad"
+        tH5=   "tu edad es"
+        year=  "año / años"
+        and=   "y"
+        month= "mes / Meses"
+        days=  "día / días"
+        tH52=  "tu próximo cumpleaños en "
+       }
+       if($("#selLang").val()=="hi"){
+        titleH="आयु की गणना करें"
+        but1=  "उम्र की गणना करें"
+        tH5=   "आपकी उम्र है"
+        year=  "वर्ष / साल"
+        and=   "और"
+        month= "माह / महीना"
+        days=  "दिन / दिन"
+        tH52=  "आपका अगला जन्मदिन"
+       }
+       if($("#selLang").val()=="pt"){
+        titleH="calcular idade"
+        but1=  "Calcular a idade"
+        tH5=   "sua idade é"
+        year=  "ano / anos"
+        and=   "e"
+        month= "mês / meses"
+        days=  "dia / dias"
+        tH52=  "seu próximo aniversário em"
+       }
+       if($("#selLang").val()=="bn"){
+        titleH="বয়স গণনা করুন"
+        but1=  "বয়স গণনা করুন"
+        tH5=   "আপনার বয়স হল"
+        year=  "বছর / বছর"
+        and=   "এবং"
+        month= "মাস / মাস"
+        days=  "দিন / দিন"
+        tH52=  "আপনার পরবর্তী জন্মদিন"
+       }
+       if($("#selLang").val()=="ru"){
+        titleH="вычислить возраст"
+        but1=  "Вычислить возраст"
+        tH5=   "Ваш возраст"
+        year=  "год / годы"
+        and=   "и"
+        month= "месяц / месяцы"
+        days=  "день / дни"
+        tH52=  "ваш следующий день рождения через"
+       }
+       if($("#selLang").val()=="ja"){
+        titleH="年齢を計算してください"
+        but1=  "年齢を計算してみよう"
+        tH5=   "あなたの年齢は"
+        year=  "年 / 年"
+        and=   "そして"
+        month= "月 / 月"
+        days=  "日 / 日"
+        tH52=  "あなたの次の誕生日は "
+       }
+       if($("#selLang").val()=="pa"){
+        titleH="ਉਮਰ ਦੀ ਗਣਨਾ ਕਰੋ"
+        but1=  "ਉਮਰ ਦਾ ਹਿਸਾਬ ਲਗਾਓ"
+        tH5=   "ਤੁਹਾਡੀ ਉਮਰ ਹੈ"
+        year=  "ਸਾਲ / ਸਾਲ"
+        and=   "ਅਤੇ"
+        month= "ਮਹੀਨਾ / ਮਹੀਨੇ"
+        days=  "ਦਿਨ / ਦਿਨ"
+        tH52=  "ਵਿੱਚ ਤੁਹਾਡਾ ਅਗਲਾ ਜਨਮਦਿਨ"
+       }
+       if($("#selLang").val()=="pa"){
+        titleH="ਉਮਰ ਦੀ ਗਣਨਾ ਕਰੋ"
+        but1=  "ਉਮਰ ਦਾ ਹਿਸਾਬ ਲਗਾਓ"
+        tH5=   "ਤੁਹਾਡੀ ਉਮਰ ਹੈ"
+        year=  "ਸਾਲ / ਸਾਲ"
+        and=   "ਅਤੇ"
+        month= "ਮਹੀਨਾ / ਮਹੀਨੇ"
+        days=  "ਦਿਨ / ਦਿਨ"
+        tH52=  "ਵਿੱਚ ਤੁਹਾਡਾ ਅਗਲਾ ਜਨਮਦਿਨ"
+       }
+    }
+    var vm=new Vue({
+            el:"#cont",
+            data:{
+                titleH:"calculate Age",
+                but1:"Calculate the age",
+                tH5:"your Age is",
+                year:"year / years",
+                and:"and",
+                month:"month / Months",
+                days:"day / days",
+                tH52:"your next birthday in "
+    
+            },
+            methods:{
+                func1:function(){
+                    setLang();
+                    this.titleH=titleH
+                    this.but1=but1
+                    this.tH5=tH5
+                    this.year=year
+                    this.and=and
+                    this.month=month
+                    this.days=days
+                    this.tH52=tH52
+    
+                    
+                }
+            }
+    
+        })
+       
+    </script>
+</body>
+</html>
