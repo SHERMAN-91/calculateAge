@@ -1,6 +1,7 @@
 body {
     background: #3e0057;
     user-select: none;
+    padding: 0 0 70px;
 }
 .setLang {
     color: white;
